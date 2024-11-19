@@ -19,4 +19,8 @@ app.get('/login', (req, res) => {
 app.get('/criarConta', (req, res) => {
     res.render('criarConta')
 })
+
+app.get('/principal', (req, res) => {
+    res.render('principal')
+})
 app.listen(3000, () => console.log("Servidor ligado na porta 3000!"))
