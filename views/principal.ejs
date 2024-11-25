@@ -6,6 +6,18 @@
     <title>Início</title>
 </head>
 <body>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi quidem ipsa fugiat harum natus debitis sunt, corrupti officia nulla illum reprehenderit ipsum dolorum, labore perferendis excepturi. Minima optio ipsum modi!</p>
+    <div>Bem vindo ao <strong>LitRevien</strong></div>
+    <div>
+        <form class="center" action="/busca" method="get">
+            <input type="text" name="busca"> <button>Buscar</button>
+            <br><br>
+            <input type="radio" name="tipo" value="genero:">Gênero &nbsp; | 
+            <input type="radio" name="tipo" value="intitle:"> Título
+            
+        </form>
+    </div>
+    <div>
+        <button onclick="window.location.href='/avaliacao'">Avaliação</button>
+    </div>
 </body>
 </html>

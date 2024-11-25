@@ -1,12 +1,24 @@
-const request = require('request')
-let express = require('express')
-const app = express()
-const path = require('path')
+let express = require('express');
+// let methodOverride = require('method-override');
+const app = express();
 
-app.set('view engine', 'ejs')
-app.set('views', path.join(__dirname, 'views'))
+const mongoose = require('mongoose');
+const Livro = require('./models/livro')
 
-app.use(express.static(path.join(__dirname, 'public')))
+mongoose.connect('mongodb://localhost:27017/livrosdb', {useNewUrlParser: true, useUnifiedTopology: true})
+.then(() => {
+    console.log(`Conexão estabelecida`)
+})
+.catch(err => {
+    console.log(`Erro ao conectar com o banco de dados ... ${err}`);
+})
+
+app.set('view engine', 'ejs');
+app.use(express.static("public"))
+
+app.use(express.urlencoded({extended: true}));
+// app.use(methodOverride ('_method'));
+
 
 app.get('/', (req, res) => {
     res.render('home')
@@ -23,4 +35,13 @@ app.get('/criarConta', (req, res) => {
 app.get('/principal', (req, res) => {
     res.render('principal')
 })
+
+app.get('/busca', (req, res) => {
+    res.render('busca')
+})
+
+app.get('/avaliacao', (req, res) => {
+    res.render('busca')
+})
+
 app.listen(3000, () => console.log("Servidor ligado na porta 3000!"))
