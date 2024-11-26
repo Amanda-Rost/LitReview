@@ -4,6 +4,7 @@ const app = express();
 
 const mongoose = require('mongoose');
 const Livro = require('./models/livro')
+const Usuario = require('./models/usuario')
 
 mongoose.connect('mongodb://localhost:27017/livrosdb', {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => {
@@ -25,16 +26,34 @@ app.get('/', (req, res) => {
 })
 
 app.get('/login', (req, res) => {
-    res.render('login')
+    res.render('login',  { errorMessage: undefined })
 })
 
 app.get('/criarConta', (req, res) => {
     res.render('criarConta')
 })
 
+
 app.get('/principal', async (req, res) => {
     const livros = await Livro.find({});
     res.render('principal', {livros});
+})
+
+app.post('/confirmaUsuario', async (req, res) => {
+    try {
+    
+        const { email, senha } = req.body;
+
+        const usuario = await Usuario.findOne({ email: email, senha: senha }).exec();
+        if (usuario) {
+            res.redirect('/principal');
+        } else {
+            res.render('login', { errorMessage: 'E-mail ou senha estão incorretos!' });
+        }
+    } catch (err) {
+        console.error('Erro ao verificar usuário:', err);
+        res.status(500).send('Erro no servidor.');
+    }
 })
 
 app.get('/busca', (req, res) => {
@@ -55,6 +74,17 @@ app.post('/principal', async (req,res) =>{
     const novoLivro = new Livro(req.body);
     await novoLivro.save();
     res.redirect('/principal')
+})
+
+app.post('/principalUsuario', async (req,res) =>{
+    try {
+        const novoUsuario = new Usuario(req.body);
+        await novoUsuario.save();
+        res.redirect('/principal');
+    } catch (err) {
+        console.error('Erro ao salvar usuário:', err);
+        res.status(500).send('Erro no servidor. Verifique os logs.');
+    }
 })
 
 app.get('/livro/:id/edit', async (req, res) => {

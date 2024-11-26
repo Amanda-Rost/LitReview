@@ -8,13 +8,24 @@
 </head>
 
 <body>
-    <form action="/principal" method="get">
+    <h1>Faça login</h1>
+
+    <!-- Exibe a mensagem de erro se existir -->
+    <% if (errorMessage) { %>
+        <p style="color: red;"><%= errorMessage %></p>
+    <% } %>
+
+    <form action="/confirmaUsuario" method="post">
         <div>
-            <p>Email:</p> <input type="email" name="email" id="email">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
         </div>
-        <p>Senha:</p><input type="text" name="senha" id="senha">
         <div>
-            <button id="botao">Enviar</button><br>
+            <label for="senha">Senha:</label>
+            <input type="password" name="senha" id="senha" required>
+        </div>
+        <div>
+            <button type="submit">Entrar</button><br>
         </div>
     </form>
 </body>

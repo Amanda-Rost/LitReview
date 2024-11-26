@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Livro = require('./models/livro')
+const Usuario = require('./models/usuario')
 
 mongoose.connect('mongodb://localhost:27017/livrosdb', {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => {
@@ -29,6 +30,28 @@ const livro2 = new  Livro({
 })
 
 Livro.insertMany([livro1, livro2])
+.then(res => {
+    console.log(res);
+})
+.catch(e => {
+    console.log(`Não salvo no banco... ${e}`);
+})
+
+const usurio1 = new Usuario({
+    nome:  "Amanda Rost",
+    dataNasc:'2006/01/02',
+    email:'amanda@gmail.com',
+    senha:'12345', 
+})
+
+const usurio2 = new Usuario({
+    nome:  "Arthur da Costa",
+    dataNasc:'2004/01/01',
+    email:'arthurdacosta@gmail.com',
+    senha:'arthur', 
+})
+
+Usuario.insertMany([usurio1, usurio2])
 .then(res => {
     console.log(res);
 })
