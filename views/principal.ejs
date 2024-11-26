@@ -19,5 +19,13 @@
     <div>
         <button onclick="window.location.href='/avaliacao'">Avaliação</button>
     </div>
+    <div>
+        <h2>Sugestões</h2>
+    <ul>
+        <% for (livro of livros) {%>
+            <li><a href="/livro/<%=livro._id%>"><%=livro.titulo%></a></li>
+        <% } %>
+    </ul>
+    </div>
 </body>
 </html>

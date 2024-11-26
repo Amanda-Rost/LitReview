@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const livroSchema = new mongoose.Schema({
-    capaURL: String, 
+    capa: String, 
     titulo: {
         type: String,
         required: true,
@@ -14,7 +14,7 @@ const livroSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    genero2: String,
+    genero3: String,
     resumo:{
         type: String,
         required: true,

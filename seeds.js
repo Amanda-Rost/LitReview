@@ -10,7 +10,7 @@ mongoose.connect('mongodb://localhost:27017/livrosdb', {useNewUrlParser: true, u
 })
 
 const livro1 = new  Livro({
-    capaURL: 'https://m.media-amazon.com/images/I/81lN79f3yhL._AC_UF1000,1000_QL80_.jpg',
+    capa: '/public/css/img/estrelasPerdidas.jpg',
     titulo: 'Star Wars: Estrelas Perdidas',
     genero1: 'Ficção científica',
     genero2: 'Ficção juvenil',
@@ -20,7 +20,7 @@ const livro1 = new  Livro({
 })
 
 const livro2 = new  Livro({
-    capaURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZaC5iBWXvkt5FF1hsVPhgisSnpwipEQdv9w&s',
+    capa: '/public/css/img/anne.jpeg',
     titulo: 'Anne de Green Gables',
     genero1: 'Ficção',
     genero2: 'Literatura juvenil',

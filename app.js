@@ -1,5 +1,5 @@
 let express = require('express');
-// let methodOverride = require('method-override');
+let methodOverride = require('method-override');
 const app = express();
 
 const mongoose = require('mongoose');
@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 app.use(express.static("public"))
 
 app.use(express.urlencoded({extended: true}));
-// app.use(methodOverride ('_method'));
+app.use(methodOverride ('_method'));
 
 
 app.get('/', (req, res) => {
@@ -32,16 +32,50 @@ app.get('/criarConta', (req, res) => {
     res.render('criarConta')
 })
 
-app.get('/principal', (req, res) => {
-    res.render('principal')
+app.get('/principal', async (req, res) => {
+    const livros = await Livro.find({});
+    res.render('principal', {livros});
 })
 
 app.get('/busca', (req, res) => {
     res.render('busca')
 })
 
+app.get('/adicionarLivro', (req, res) => {
+    res.render('adicionarLivro')
+})
+
+app.get('/livro/:id', async (req, res) => {
+    const {id} = req.params;
+    const livro =  await Livro.findById(id);
+    res.render('show', {livro})
+})
+
+app.post('/principal', async (req,res) =>{
+    const novoLivro = new Livro(req.body);
+    await novoLivro.save();
+    res.redirect('/principal')
+})
+
+app.get('/livro/:id/edit', async (req, res) => {
+    const {id} = req.params;
+    const livro = await Livro.findById(id)
+    res.render('edit', {livro});
+})
+
+app.put('/livro/:id', async (req, res) =>{
+    const {id} = req.params;
+    await Livro.findByIdAndUpdate(id, req.body, {runValidators: true});
+    res.redirect('/livro/'+ id);
+})
+
+app.delete('/livro/:id', async (req, res) => {
+    const {id} = req.params;
+    await Livro.findByIdAndDelete(id)
+    res.redirect('/principal');
+})
 app.get('/avaliacao', (req, res) => {
     res.render('busca')
 })
 
-app.listen(3000, () => console.log("Servidor ligado na porta 3000!"))
+app.listen(5000, () => console.log("Servidor ligado na porta 5000!"))

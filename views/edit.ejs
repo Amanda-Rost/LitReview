@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar um novo curso</title>
+</head>
+<body>
+    <h2>Alterar livro <%=livro.titulo%>:</h2>
+    <form action="/livro/<%=livro._id%>?_method=PUT" method="post">
+        <label for="titulo">Titulo: </label>
+        <input type="text" id="titulo" name="titulo" value="<%=livro.titulo%>">
+        <br><br>
+        <label for="capa">Capa: </label>
+        <input type="image" src="" alt="" id="capa" name="capa" value="<%=livro.capa%>">
+        <br><br>
+        <label for="genero">Digite três gêneros que o livro pertença: </label>
+        <input type="text" id="genero1" name="genero1" value="<%=livro.genero1%>">
+        <input type="text" id="genero1" name="genero2" value="<%=livro.genero2%>">
+        <input type="text" id="genero1" name="genero3" value="<%=livro.genero3%>">
+        <br><br>
+        <label for="resumo">Resumo: </label>
+        <input type="text" id="resumo" name="resumo" value="<%=livro.resumo%>">
+        <br><br>
+        <button>Alterar</button>
+    </form>
+    <br>
+    <a href="/livro/<%=livro._id%>"><button>Voltar</button></a>
+</body>
+</html>
