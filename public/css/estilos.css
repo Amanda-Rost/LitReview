@@ -41,3 +41,12 @@ footer{
     margin: 10px;
     margin-right: 20px;
 }
+
+a{
+    text-decoration: none;
+    color: rgb(8, 6, 3);
+}
+
+.voltar {
+    text-align: center;
+  }

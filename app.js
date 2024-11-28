@@ -76,17 +76,48 @@ app.post('/confirmaUsuario', async (req, res) => {
 })
 
 app.get('/pesquisa', async (req, res) => {
-    const { isbn } = req.query;
-    let resposta = {};
-    await request('https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn, (error, response, body) => {
-        if (!error && response.statusCode == 200) {
-         resposta = JSON.parse(body);
-         console.log(resposta.totalItems)
+    const { algo } = req.query;
+
+    try {
+        let resposta = {};
+
+        // Consulta por ISBN
+        await new Promise((resolve, reject) => {
+            request(`https://www.googleapis.com/books/v1/volumes?q=isbn:${algo}`, (error, response, body) => {
+                if (error) return reject(error);
+                if (response.statusCode === 200) {
+                    resposta = JSON.parse(body);
+                    if (resposta.totalItems > 0) resolve(); // Para de buscar se já encontrou por ISBN
+                    else resolve();
+                } else {
+                    reject(new Error('Erro ao buscar por ISBN'));
+                }
+            });
+        });
+
+        // Se não encontrar por ISBN, tenta buscar por título
+        if (resposta.totalItems === 0) {
+            await new Promise((resolve, reject) => {
+                request(`https://www.googleapis.com/books/v1/volumes?q=title:${algo}`, (error, response, body) => {
+                    if (error) return reject(error);
+                    if (response.statusCode === 200) {
+                        resposta = JSON.parse(body);
+                        resolve();
+                    } else {
+                        reject(new Error('Erro ao buscar por título'));
+                    }
+                });
+            });
         }
-        
-         res.render('resultadoBusca', { resposta })
-    });
-})
+
+        // Renderiza a resposta
+        res.render('resultadoBusca', { resposta });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Erro ao processar a pesquisa.');
+    }
+});
+
 
 
 app.get('/adicionarLivro', (req, res) => {
