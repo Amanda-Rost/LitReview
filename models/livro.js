@@ -1,24 +1,28 @@
 const mongoose = require('mongoose');
 
 const livroSchema = new mongoose.Schema({
-    capa: String, 
-    titulo: {
+    isbn10:{
         type: String,
+        unique: true
+    },
+    isbn13: {
+        type: Number,
+        unique: true
+    },
+    indicar:{
+        type: Boolean,
+        required: true
+    },
+     
+    avaliacao:  {
+        type: Number,
         required: true,
-    } ,
-    genero1:  {
+        max: 5
+    },
+    comentario:  {
         type: String,
         required: true,
     },
-    genero2:  {
-        type: String,
-        required: true,
-    },
-    genero3: String,
-    resumo:{
-        type: String,
-        required: true,
-    } 
 })
 
 const Livro = mongoose.model("Livro", livroSchema); 

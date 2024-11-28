@@ -1,31 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Início</title>
-</head>
-<body>
-    <div>Bem vindo ao <strong>LitRevien</strong></div>
-    <div>
-        <form class="center" action="/busca" method="get">
-            <input type="text" name="busca"> <button>Buscar</button>
-            <br><br>
-            <input type="radio" name="tipo" value="genero:">Gênero &nbsp; | 
-            <input type="radio" name="tipo" value="intitle:"> Título
-            
-        </form>
-    </div>
-    <div>
-        <button onclick="window.location.href='/avaliacao'">Avaliação</button>
-    </div>
-    <div>
-        <h2>Sugestões</h2>
-    <ul>
-        <% for (livro of livros) {%>
-            <li><a href="/livro/<%=livro._id%>"><%=livro.titulo%></a></li>
-        <% } %>
-    </ul>
-    </div>
-</body>
-</html>
+<%- include('./partials/head') %>
+
+<div class="busca">
+    <h2 class="prin">Pesquisar</h2>
+</div>
+<form class="center" action="/pesquisa" method="get">
+    <input type="text" name="isbn" id="isbn" placeholder="Digite o ISBN do livro">
+    <button type="submit">Buscar</button>
+</form>
+
+<%- include('./partials/footer') %>

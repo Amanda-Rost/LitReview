@@ -1,0 +1,44 @@
+<%- include('./partials/head') %>
+
+    <% if (resposta.totalItems> 0) { %>
+        <h2>Livros encontrados</h2>
+
+        <% for (let item of resposta.items) { 
+            const livro= item.volumeInfo; 
+            let autores= "" ;
+          
+            if(livro.authors){
+
+            let i = 0;
+             while(i < livro.authors.length){
+                 autores +=livro.authors[i]; 
+                
+                 
+                 if(i < livro.authors.length -1){ 
+                    autores +=', ' ; 
+                } else{ 
+                    autores +='.' ; 
+                    }
+                i++;
+             }
+            } %>
+            <div class="livro">
+                <img src="<%= livro.imageLinks ? livro.imageLinks.thumbnail : '/css/img/transparent.png' %>"
+                    alt="Capa do livro">
+                <p>Título: <%= livro.title %>
+                </p>
+                <p>Autores: <%= autores %>
+                </p>
+                <div>
+                    <% if (livro.industryIdentifiers) { for (let isbn of livro.industryIdentifiers) { %>
+                        <p>
+                            <%= isbn.type %>: <%= isbn.identifier %>
+                        </p>
+                        <% } } %>
+                </div>
+            </div>
+            <% } } else { %>
+                <h2>Nenhum livro encontrado</h2>
+                <% } %>
+
+                    <%- include('./partials/footer') %>
