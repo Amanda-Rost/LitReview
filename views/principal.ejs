@@ -1,11 +1,16 @@
 <%- include('./partials/head') %>
 
-<div class="busca">
-    <h2 class="prin">Pesquisar</h2>
-</div>
-<form class="center" action="/pesquisa" method="get">
-    <input type="text" name="algo" id="algo" placeholder="Digite o que deseja achar">
-    <button type="submit">Buscar</button>
-</form>
+    <div class="busca">
+        <h2 class="prin">Pesquisar</h2>
+    </div>
+    <form class="center" action="/pesquisa" method="get">
+        <input type="text" name="algo" id="algo" placeholder="Digite o que deseja achar">
+        <input type="radio" name="tipo" value="isbn:">ISBN &nbsp; |
+        <input type="radio" name="tipo" value="intitle:"> Título &nbsp; |
+        <input type="radio" name="tipo" value="authors:"> Author &nbsp; |
+        <input type="radio" name="tipo" value="categories:"> Gênero
 
-<%- include('./partials/footer') %>
+        <button type="submit">Buscar</button>
+    </form>
+
+    <%- include('./partials/footer') %>

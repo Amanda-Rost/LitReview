@@ -1,0 +1,74 @@
+<%- include('./partials/head') %>
+
+<% for (let item of resposta.items) {
+    const livro = item.volumeInfo;
+
+    let autores = "";
+    if (livro.authors) {
+        let cont = livro.authors.length - 2;
+        let i = 0;
+        while (i < livro.authors.length) {
+            autores += livro.authors[i];
+            if (cont == i) {
+                autores += ' & ';
+            } else if (i < livro.authors.length - 1) {
+                autores += ', ';
+            } else {
+                autores += '.';
+            }
+            i++;
+        }
+    }
+
+    let genero = "";
+    if (livro.categories) {
+        let controle = livro.categories.length - 2;
+        let genCont = 0;
+        for (let gen of livro.categories) {
+            genero += livro.categories[genCont];
+            if (controle == genCont) {
+                genero += ' & ';
+            } else if (genCont < livro.categories.length - 1) {
+                genero += ', ';
+            } else {
+                genero += '.';
+            }
+            genCont++;
+        }
+    }
+%>
+    <div class="livro">
+        <img src="<%= livro.imageLinks ? livro.imageLinks.thumbnail : '/css/img/transparent.png' %>" alt="Capa do livro">
+        <p><strong>Título: </strong> <%= livro.title %></p>
+        <p><strong>Autores: </strong> <%= autores %></p>
+        <p><strong>Gênero: </strong> <%= genero %></p>
+        <p><strong>Resumo: </strong><%=livro.description %></p>
+        <% let ident =""
+        if (livro.industryIdentifiers) {
+            for (let isbn of livro.industryIdentifiers) { 
+                ident = isbn.identifier;%>
+                <p><strong><%= isbn.type %>:</strong> <%= isbn.identifier %></p>
+            <% } 
+        } %>
+        <div >
+            <% if (adicionado) { %>
+                <p>FOI ADICIONADO A LISTA COM SUCESSO :D</p>
+            <% } else { %>
+                <form action="/adicionaNaLista/<%=ident%>" method="POST">
+                    <button type="submit">Adicionar à minha lista</button>
+                </form>
+            <% } %>
+        </div>
+    
+            <button onclick="window.location.href='/novaAvaliação'" >Adicionar Avaliação</button>
+        
+    </div>
+    <div>
+        <form action="/resultadoBusca" method="POST">
+            <button type="submit">Voltar</button>
+        </form>
+    </div>
+<% } %>
+   
+
+<%- include('./partials/footer') %>

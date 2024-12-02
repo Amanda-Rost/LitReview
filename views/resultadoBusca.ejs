@@ -1,47 +1,63 @@
-<%- include('./partials/head') %>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livros Encontrados - LitReview</title>
+    <link rel="stylesheet" href="/css/resultado.css">
+</head>
+<body>
+    <%- include('./partials/head') %>
 
-    <% if (resposta.totalItems> 0) { %>
-        <h2>Livros encontrados</h2>
+    <% if (resposta.totalItems > 0) { %>
+        <div class="sub-header">
+            <h2>Livros encontrados</h2>
+        </div>
 
-        <% for (let item of resposta.items) { 
-            const livro= item.volumeInfo; 
-            let autores= "" ;
-          
-            if(livro.authors){
-
-            let i = 0;
-             while(i < livro.authors.length){
-                 autores +=livro.authors[i]; 
-                
-                 
-                 if(i < livro.authors.length -1){ 
-                    autores +=', ' ; 
-                } else{ 
-                    autores +='.' ; 
+        <div class="livros-container">
+            <% for (let item of resposta.items) {
+                const livro = item.volumeInfo;
+                let autores = "";
+                if (livro.authors) {
+                    let cont = livro.authors.length - 2;
+                    let i = 0;
+                    while (i < livro.authors.length) {
+                        autores += livro.authors[i];
+                        if (cont == i) {
+                            autores += ' & ';
+                        } else if (i < livro.authors.length - 1) {
+                            autores += ', ';
+                        } else {
+                            autores += '.';
+                        }
+                        i++;
                     }
-                i++;
-             }
-            } %>
-            <div class="livro">
-                <img src="<%= livro.imageLinks ? livro.imageLinks.thumbnail : '/css/img/transparent.png' %>"
-                    alt="Capa do livro">
-                <p>Título: <%= livro.title %>
-                </p>
-                <p>Autores: <%= autores %>
-                </p>
-                <div>
-                    <% if (livro.industryIdentifiers) { for (let isbn of livro.industryIdentifiers) { %>
-                        <p>
-                            <%= isbn.type %>: <%= isbn.identifier %>
-                        </p>
-                        <% } } %>
+                } %>
+                <div class="livro">
+                    <img src="<%= livro.imageLinks ? livro.imageLinks.thumbnail : '/css/img/transparent.png' %>" alt="Capa do livro">
+                    <p><strong>Título:</strong> <%= livro.title %></p>
+                    <p><strong>Autores:</strong> <%= autores %></p>
+                    <% if (livro.industryIdentifiers) {
+                        for (let isbn of livro.industryIdentifiers) { %>
+                            <p><strong><%= isbn.type %>:</strong> <%= isbn.identifier %></p>
+                        <% } 
+                    } %>
+                    <div>
+                       
+                    <a href="/maisInformacoes/<%=livro.industryIdentifiers[0].identifier%>" method="GET" ><button>Mais informações</button></a>
+                    </div>
                 </div>
-            </div>
-            <% } } else { %>
-                <h2>Nenhum livro encontrado</h2>
-                <% } %>
-            <div class="voltar">
-                <a href="/principal" ><button>Voltar</button></a>
-                </div>
-                
-                    <%- include('./partials/footer') %>
+               
+            <% } %>
+        </div>
+    <% } else { %>
+        <h2 class="sub-header">Nenhum livro encontrado</h2>
+    <% } %>
+    
+    <div class="voltar">
+        <a href="/principal"><button>Voltar</button></a>
+    </div>
+
+    <%- include('./partials/footer') %>
+</body>
+</html>

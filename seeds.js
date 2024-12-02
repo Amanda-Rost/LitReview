@@ -33,22 +33,18 @@ Usuario.insertMany([usuario1, usuario2])
 })
 
 const livro1 = new  Livro({
-    isbn10:'383323203X',
-    isbn13:9783833232039,
-    indicar: true,
-    avaliacao: 4.5,
-    comentario: usuario1.email + ': Um lindo romance para um dia de chuva, seu único defeito é que precisa conhecer a saga de star wars para entender completamente a história!'
+    titulo: 'Harry Potter e a pedra filosofal',
+    autores:'J. K.',
+    isbn10:'0054506967X',
+    isbn13:'9780545069670',
+    resumo: 'Rescued from the outrageous neglect of his aunt and uncle, a young boy with a great destiny proves his worth while attending Hogwarts School for Wizards and Witches. 180,000 first printing.',
+    genero: 'Juvenile Fiction',
+    capalink: 'http://books.google.com/books/content?id=gW36ngEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api'
 })
 
-const livro2 = new  Livro({
-    isbn10:'0681007702',
-    isbn13:9780681007703,
-    indicar: true,
-    avaliacao: 4.7,
-    comentario: usuario1.email + ': Otimo livro, principalmente quando você quer ler algo para passar o tempo, é incrível aconpanhar a história de Anne, ele realmente de transporta para dentro da história :D'
-})
 
-Livro.insertMany([livro1, livro2])
+
+Livro.insertMany([livro1])
 .then(res => {
     console.log(res);
 })

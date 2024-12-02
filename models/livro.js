@@ -1,28 +1,33 @@
 const mongoose = require('mongoose');
 
 const livroSchema = new mongoose.Schema({
-    isbn10:{
+    titulo: {
+        type: String,
+        require: true
+    },
+    autores:{
+        type: String,
+        require: true
+    },
+     isbn10:{
         type: String,
         unique: true
     },
     isbn13: {
-        type: Number,
+        type: String,
         unique: true
     },
-    indicar:{
-        type: Boolean,
-        required: true
-    },
-     
-    avaliacao:  {
-        type: Number,
-        required: true,
-        max: 5
-    },
-    comentario:  {
+    resumo: {
         type: String,
-        required: true,
+        require: true
     },
+    genero: {
+        type: String,
+        require: true
+    },
+    capalink: {
+        type: String,
+    }
 })
 
 const Livro = mongoose.model("Livro", livroSchema); 

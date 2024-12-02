@@ -53,7 +53,6 @@ app.get('/criarConta', (req, res) => {
     res.render('criarConta')
 })
 
-
 app.get('/principal', async (req, res) => {
     const livros = await Livro.find({});
     res.render('principal', { livros });
@@ -75,50 +74,33 @@ app.post('/confirmaUsuario', async (req, res) => {
     }
 })
 
-app.get('/pesquisa', async (req, res) => {
-    const { algo } = req.query;
-
-    try {
-        let resposta = {};
-
-        // Consulta por ISBN
-        await new Promise((resolve, reject) => {
-            request(`https://www.googleapis.com/books/v1/volumes?q=isbn:${algo}`, (error, response, body) => {
-                if (error) return reject(error);
-                if (response.statusCode === 200) {
-                    resposta = JSON.parse(body);
-                    if (resposta.totalItems > 0) resolve(); // Para de buscar se já encontrou por ISBN
-                    else resolve();
-                } else {
-                    reject(new Error('Erro ao buscar por ISBN'));
-                }
-            });
-        });
-
-        // Se não encontrar por ISBN, tenta buscar por título
-        if (resposta.totalItems === 0) {
-            await new Promise((resolve, reject) => {
-                request(`https://www.googleapis.com/books/v1/volumes?q=title:${algo}`, (error, response, body) => {
-                    if (error) return reject(error);
-                    if (response.statusCode === 200) {
-                        resposta = JSON.parse(body);
-                        resolve();
-                    } else {
-                        reject(new Error('Erro ao buscar por título'));
-                    }
-                });
-            });
+app.get('/maisInformacoes/:livro', async (req,res) =>{
+     const {livro} = req.params;
+     let resposta = {}
+     const adicionado = req.query.adicionado === 'true';
+     console.log(livro)
+     await request("https://www.googleapis.com/books/v1/volumes?q=isbn:" + livro, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            resposta = JSON.parse(body)
         }
+        console.log(resposta);
+        res.render('maisInformacoes', { resposta, adicionado })
+    })
+})
 
-        // Renderiza a resposta
-        res.render('resultadoBusca', { resposta });
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Erro ao processar a pesquisa.');
-    }
+app.get('/pesquisa', async (req, res) => {
+    let { algo, tipo } = req.query
+    if (!tipo)
+        tipo = ""
+
+    let resposta = {}
+    await request("https://www.googleapis.com/books/v1/volumes?q=" + tipo + algo, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            resposta = JSON.parse(body)
+        }
+        res.render('resultadoBusca', { resposta })
+    })
 });
-
-
 
 app.get('/adicionarLivro', (req, res) => {
     res.render('adicionarLivro')
@@ -135,6 +117,41 @@ app.post('/principal', async (req, res) => {
     await novoLivro.save();
     res.redirect('/principal')
 })
+
+app.post('/adicionaNaLista/:id', async (req, res) => {
+    const { id } = req.params;
+
+    await request("https://www.googleapis.com/books/v1/volumes?q=isbn:" + id, async (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            const resposta = JSON.parse(body);
+            console.log(resposta + "Rodou");
+            if (resposta.items && Array.isArray(resposta.items)) {
+                for (let item of resposta.items) {
+                    const livro = item.volumeInfo;
+
+                    const autores = livro.authors ? livro.authors.join(", ") : "Sem autores";
+                    const genero = livro.categories ? livro.categories.join(", ") : "Sem gêneros";
+
+                    const adi = {
+                        titulo: livro.title,
+                        autores: autores,
+                        isbn10: livro.industryIdentifiers?.[0]?.identifier || "Não disponível",
+                        isbn13: livro.industryIdentifiers?.[1]?.identifier || "Não disponível",
+                        resumo: livro.description || "Sem resumo",
+                        genero: genero,
+                        capalink: livro.imageLinks?.thumbnail || "Sem imagem"
+                    };
+
+                    await Livro.insertMany([adi]).catch(e => {
+                        console.log(`Erro ao salvar no banco... ${e}`);
+                    });
+                }
+            }
+        }
+
+        res.redirect(`/maisInformacoes/${id}?adicionado=true`);
+    });
+});
 
 app.post('/principalUsuario', async (req, res) => {
     try {
@@ -164,6 +181,5 @@ app.delete('/livro/:id', async (req, res) => {
     await Livro.findByIdAndDelete(id)
     res.redirect('/principal');
 })
-
 
 app.listen(3000, () => console.log("Servidor ligado na porta 3000!"))
