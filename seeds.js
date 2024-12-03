@@ -36,6 +36,7 @@ Usuario.insertMany([usuario1, usuario2])
 const livro1 = new  Livro({
     titulo: 'Harry Potter e a pedra filosofal',
     autores:'J. K.',
+    emailUsuario: usuario1.email,
     isbn10:'0054506967X',
     isbn13:'9780545069670',
     resumo: 'Rescued from the outrageous neglect of his aunt and uncle, a young boy with a great destiny proves his worth while attending Hogwarts School for Wizards and Witches. 180,000 first printing.',

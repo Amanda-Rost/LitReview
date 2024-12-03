@@ -9,6 +9,10 @@ const livroSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    emailUsuario:{
+        type: String,
+        require: true
+    },
      isbn10:{
         type: String,
         unique: true
