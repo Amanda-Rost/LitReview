@@ -13,14 +13,10 @@ const livroSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-     isbn10:{
-        type: String,
-        unique: true
-    },
-    isbn13: {
-        type: String,
-        unique: true
-    },
+     isbn10: String
+    ,
+    isbn13:String,
+
     resumo: {
         type: String,
         require: true

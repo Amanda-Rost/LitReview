@@ -84,12 +84,12 @@ app.get('/maisInformacoes/:livro', async (req,res) =>{
      const {livro} = req.params;
      let resposta = {}
      const adicionado = req.query.adicionado === 'true';
-     console.log(livro)
+  
      await request("https://www.googleapis.com/books/v1/volumes?q=isbn:" + livro, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             resposta = JSON.parse(body)
         }
-        console.log(resposta);
+        
         res.render('maisInformacoes', { resposta, adicionado })
     })
 })
@@ -112,10 +112,10 @@ app.get('/adicionarLivro', (req, res) => {
     res.render('adicionarLivro')
 })
 
-app.get('/livro/:id', async (req, res) => {
+app.get('/avaliacao/:id', async (req, res) => {
     const { id } = req.params;
-    const livro = await Livro.findById(id);
-    res.render('show', { livro })
+    const avalicao = await Avaliacao.findById(id);
+    res.render('verAvaliacao', { avalicao })
 })
 
 app.post('/principal', async (req, res) => {
@@ -130,17 +130,18 @@ app.post('/adicionaNaLista/:id', async (req, res) => {
     await request("https://www.googleapis.com/books/v1/volumes?q=isbn:" + id, async (error, response, body) => {
         if (!error && response.statusCode == 200) {
             const resposta = JSON.parse(body);
-            console.log(resposta + "Rodou");
+            const { email } = req.body;
             if (resposta.items && Array.isArray(resposta.items)) {
                 for (let item of resposta.items) {
                     const livro = item.volumeInfo;
 
                     const autores = livro.authors ? livro.authors.join(", ") : "Sem autores";
                     const genero = livro.categories ? livro.categories.join(", ") : "Sem gêneros";
-
+                  
                     const adi = {
                         titulo: livro.title,
                         autores: autores,
+                        emailUsuario: email,
                         isbn10: livro.industryIdentifiers?.[0]?.identifier || "Não disponível",
                         isbn13: livro.industryIdentifiers?.[1]?.identifier || "Não disponível",
                         resumo: livro.description || "Sem resumo",
@@ -170,19 +171,19 @@ app.post('/principalUsuario', async (req, res) => {
     }
 })
 
-app.get('/livro/:id/edit', async (req, res) => {
+app.get('/editAvaliacao/:id', async (req, res) => {
     const { id } = req.params;
-    const livro = await Livro.findById(id)
-    res.render('edit', { livro });
+    const avaliacao = await Avaliacao.findById(id)
+    res.render('editAvaliacao', { avaliacao });
 })
 
-app.put('/livro/:id', async (req, res) => {
-    const { id } = req.params;
-    await Livro.findByIdAndUpdate(id, req.body, { runValidators: true });
-    res.redirect('/livro/' + id);
+app.put('/avaliacao/:id', async (req, res) => {
+    const {id} = req.params;
+    await Avaliacao.findByIdAndUpdate(id, req.body, { runValidators: true });
+    res.redirect('/avaliacao/' + id);
 })
 
-app.delete('/livro/:id', async (req, res) => {
+app.delete('/avaliacao/:id', async (req, res) => {
     const { id } = req.params;
     await Livro.findByIdAndDelete(id)
     res.redirect('/principal');

@@ -10,7 +10,7 @@
     <div class="overlay"></div> <!-- Adicionando a sobreposição para cobrir toda a tela -->
     <div class="container">
         <%- include('./partials/head') %>
-
+        
         <% for (let item of resposta.items) {
             const livro = item.volumeInfo;
 
@@ -61,17 +61,28 @@
                         <p><strong><%= isbn.type %>:</strong> <%= isbn.identifier %></p>
                     <% } 
                 } %>
+                
                 <div class="button-group">
                     <% if (adicionado) { %>
                         <p>FOI ADICIONADO A LISTA COM SUCESSO :D</p>
                     <% } else { %>
-                        <form action="/adicionaNaLista/<%=ident%>" method="POST">
-                            <button type="submit" class="secondary">Adicionar à minha lista</button>
+                        <form action="/adicionaNaLista/<%=ident%>" method="POST" id="addListForm">
+                            <button type="submit" class="secondary" id="addToListButton">Adicionar à minha lista</button>
                         </form>
                     <% } %>
                     <button onclick="window.location.href='/novaAvaliação'">Adicionar Avaliação</button>
                 </div>
+
+                <!-- Formulário oculto para capturar o e-mail -->
+                <div id="emailFormContainer" style="display: none;">
+                    <form action="/adicionaNaLista/<%=ident%>" method="POST">
+                        <label for="email">Confirme seu e-mail:</label>
+                        <input type="email" id="email" name="email" required>
+                        <button type="submit">Confirmar e Adicionar</button>
+                    </form>
+                </div>
             </div>
+
             <div class="voltar">
                 <form action="/resultadoBusca" method="POST">
                     <button type="submit">Voltar</button>
@@ -81,5 +92,13 @@
 
         <%- include('./partials/footer') %>
     </div>
+
+    <script>
+        // Mostrar o formulário de e-mail quando o botão "Adicionar à minha lista" for clicado
+        document.getElementById("addToListButton").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevenir o envio do formulário
+            document.getElementById("emailFormContainer").style.display = "block"; // Mostrar o formulário
+        });
+    </script>
 </body>
 </html>

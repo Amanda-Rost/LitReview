@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterndo Avaliação</title>
+</head>
+<body>
+    <h2>Alterar Avaliação do Livro <%=avaliacao.titulo%>:</h2>
+    <form action="/avaliacao/<%=avaliacao._id%>?_method=PUT" method="POST">
+        <label for="recomenda">Recomenda? </label>
+        <input type="radio" name="recomenda" value="true" <%= avaliacao.recomenda === 'true' ? 'checked' : '' %>> Sim &nbsp; |
+        <input type="radio" name="recomenda" value="false" <%= avaliacao.recomenda === 'false' ? 'checked' : '' %>> Não &nbsp;
+    
+        <label for="comentario">Comentário: </label>
+        <input type="text" id="comentario" name="comentario" value="<%=avaliacao.comentario%>">
+    
+        <button>Alterar</button>
+    </form>
+    
+    <br>
+    <a href="/suasAvaliacoes"><button>Voltar</button></a>
+</body>
+</html>

@@ -9,8 +9,8 @@
     <h2>Suas Avaliações</h2>
     <ul>
         <% for (let avaliacao of avaliacoes) {%>
-            <li><a href="/avaliacao/<%=avaliacao.isbn%>"><%=avaliacao.titulo%></a></li>
-            <a href="/editAvaliacao/<%=avaliacao.isbn%>"><button>Editar a avaliação</button></a>
+            <li><a href="/avaliacao/<%=avaliacao._id%>"><%=avaliacao.titulo%></a></li>
+            <a href="/editAvaliacao/<%=avaliacao._id%>"><button>Editar a avaliação</button></a>
         <% } %>
     </ul>
  <%- include('./partials/footer') %>
