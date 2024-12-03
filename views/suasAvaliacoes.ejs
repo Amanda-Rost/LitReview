@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suas Avaliações</title>
+</head>
+<body>
+    <h2>Suas Avaliações</h2>
+    <ul>
+        <% for (let avaliacao of avaliacoes) {%>
+            <li><a href="/avaliacao/<%=avaliacao.isbn%>"><%=avaliacao.titulo%></a></li>
+            <a href="/editAvaliacao/<%=avaliacao.isbn%>"><button>Editar a avaliação</button></a>
+        <% } %>
+    </ul>
+ <%- include('./partials/footer') %>
+    

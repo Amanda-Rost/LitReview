@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Livro = require('./models/livro')
 const Usuario = require('./models/usuario')
+const Avaliacao = require('./models/avaliacao');
 
 mongoose.connect('mongodb://localhost:27017/livrosdb', {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => {
@@ -42,8 +43,6 @@ const livro1 = new  Livro({
     capalink: 'http://books.google.com/books/content?id=gW36ngEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api'
 })
 
-
-
 Livro.insertMany([livro1])
 .then(res => {
     console.log(res);
@@ -52,3 +51,18 @@ Livro.insertMany([livro1])
     console.log(`Não salvo no banco... ${e}`);
 })
 
+const avaliacao1 = new  Avaliacao({
+    email:"amanda@gmail.com",
+    titulo:"Harry Potter e a pedra filosofal",
+    isbn:'9780545069670',
+    recomenda:true,
+    comentario: "É um ótimo livro pra quando você quer sair da sua realidade!"
+})
+
+Avaliacao.insertMany([avaliacao1])
+.then(res => {
+    console.log(res);
+})
+.catch(e => {
+    console.log(`Não salvo no banco... ${e}`);
+})

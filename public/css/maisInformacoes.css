@@ -6,12 +6,32 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 10px; /* Espaço para garantir que o cabeçalho não sobreponha */
     position: relative;
     min-height: 100vh; /* Garante que o body cubra a altura total da tela */
 }
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #62a8ee; /* Cor de fundo */
+    border-radius: 15px; /* Bordas arredondadas */
+    padding: 20px; /* Espaçamento interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+    margin: 20px auto; /* Centraliza e adiciona espaçamento */
+    max-width: 600px; /* Limita a largura */
+}
+
+.header-container h1 {
+    color: white; /* Cor do texto */
+    font-size: 2.5em; /* Tamanho da fonte */
+    font-weight: bold; /* Negrito */
+    text-align: center; /* Centraliza o texto */
+    margin: 0; /* Remove margens externas */
+}
 
 .overlay {
-    background: rgba(79, 172, 254, 0.9); /* Mantendo o gradiente azul claro */
+    background: rgba(79, 172, 254, 0.8); /* Ajuste da opacidade */
     position: absolute;
     top: 0;
     left: 0;
@@ -34,7 +54,7 @@ body {
 }
 
 h1.title {
-    background-color: #0073e6;
+    background-color: #62a8ee;
     color: white;
     padding: 20px;
     font-size: 2.5em;
@@ -101,4 +121,11 @@ button.secondary:hover {
 .voltar {
     text-align: center;
     margin-top: 20px;
+}
+
+a {
+    /* Remove o sublinhado dos links */
+    text-decoration: none;
+    /* Define a cor do texto */
+    color: rgb(8, 6, 3);
 }

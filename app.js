@@ -7,8 +7,9 @@ const session = require('express-session');
 
 
 const mongoose = require('mongoose');
-const Livro = require('./models/livro')
-const Usuario = require('./models/usuario')
+const Livro = require('./models/livro');
+const Usuario = require('./models/usuario');
+const Avaliacao = require('./models/avaliacao');
 
 mongoose.connect('mongodb://localhost:27017/livrosdb', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -56,6 +57,11 @@ app.get('/criarConta', (req, res) => {
 app.get('/principal', async (req, res) => {
     const livros = await Livro.find({});
     res.render('principal', { livros });
+})
+
+app.get('/suasAvaliacoes', async (req, res) => {
+    const avaliacoes = await Avaliacao.find({})
+    res.render('suasAvaliacoes', {avaliacoes})
 })
 
 app.post('/confirmaUsuario', async (req, res) => {

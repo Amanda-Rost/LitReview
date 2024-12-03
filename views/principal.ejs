@@ -1,16 +1,36 @@
-<%- include('./partials/head') %>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LitReview - Página Principal</title>
+    <link rel="stylesheet" href="/css/principal.css">
+</head>
+<body>
+    <div class="overlay"></div> 
+    <div class="container">
+        <h1 class="title">Bem-vindo ao LitReview</h1>
 
-    <div class="busca">
-        <h2 class="prin">Pesquisar</h2>
+        <div class="busca">
+            <h2 class="prin">Pesquisar</h2>
+            <form class="center" action="/pesquisa" method="get">
+                <input type="text" name="algo" id="algo" placeholder="Digite o que deseja achar">
+                <div>
+                    <input type="radio" name="tipo" value="isbn:"> ISBN &nbsp; |
+                    <input type="radio" name="tipo" value="intitle:"> Título &nbsp; |
+                    <input type="radio" name="tipo" value="authors:"> Author &nbsp; |
+                    <input type="radio" name="tipo" value="categories:"> Gênero
+                </div>
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+
+        <div class="reviews">
+            <h2>Suas Avaliações</h2>
+            <button onclick="window.location.href='/suasAvaliacoes'">Clique aqui</button>
+        </div>
     </div>
-    <form class="center" action="/pesquisa" method="get">
-        <input type="text" name="algo" id="algo" placeholder="Digite o que deseja achar">
-        <input type="radio" name="tipo" value="isbn:">ISBN &nbsp; |
-        <input type="radio" name="tipo" value="intitle:"> Título &nbsp; |
-        <input type="radio" name="tipo" value="authors:"> Author &nbsp; |
-        <input type="radio" name="tipo" value="categories:"> Gênero
-
-        <button type="submit">Buscar</button>
-    </form>
 
     <%- include('./partials/footer') %>
+</body>
+</html>
