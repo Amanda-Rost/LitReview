@@ -1,17 +1,17 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background: url('img/fundo2.webp') no-repeat center center; /* Adicionando a imagem de fundo */
-    background-size: cover; /* Faz a imagem cobrir toda a área */
+    background: url('img/fundo2.webp') no-repeat center center;
+    background-size: cover;
     margin: 0;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start; /* Alinha os itens ao início da tela */
+    height: 100vh;
     position: relative;
-    min-height: 100vh; /* Garante que o body cubra a altura total da tela */
 }
 
 .overlay {
-    background: rgba(79, 172, 254, 0.9); /* Mantendo o gradiente azul claro */
+    background: rgba(79, 172, 254, 0.9);
     position: absolute;
     top: 0;
     left: 0;
@@ -28,7 +28,7 @@ body {
     text-align: center;
     width: 80%;
     max-width: 800px;
-    margin: 20px;
+    margin-top: 3cm; /* Ajuste para mover o container para baixo */
     position: relative;
     z-index: 1;
 }
@@ -50,25 +50,6 @@ h2.prin, h2 {
     margin-bottom: 20px;
 }
 
-.livro {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.livro img {
-    max-width: 150px;
-    margin-bottom: 20px;
-}
-
-.livro p {
-    margin: 10px 0;
-}
-
 button {
     background-color: #0073e6;
     color: white;
@@ -78,27 +59,62 @@ button {
     cursor: pointer;
     font-size: 1em;
     margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 button:hover {
     background-color: #005bb5;
+    transform: scale(1.05);
 }
 
-button.secondary {
+.reviews, .faves {
     background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
 }
 
-button.secondary:hover {
+.reviews:hover, .faves:hover {
     background-color: #218838;
+    transform: scale(1.05);
 }
 
-.button-group {
-    display: flex;
-    justify-content: center;
-    gap: 1cm; /* Espaço de 1cm entre os botões */
+.sair {
+    position: absolute;
+    top: 20px; /* Alinha ao topo */
+    right: 20px; /* Alinha à direita */
 }
 
-.voltar {
+.sair a {
+    background-color: #ff4757;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.sair a:hover {
+    background-color: #e04040;
+    transform: scale(1.05);
+}
+
+footer {
     text-align: center;
-    margin-top: 20px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #0073e6;
+    font-weight: bold;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }

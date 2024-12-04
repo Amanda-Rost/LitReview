@@ -1,0 +1,157 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background: url('img/fundo2.webp') no-repeat center center;
+    background-size: cover;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Alinha os itens ao centro verticalmente */
+    height: 100vh;
+    position: relative;
+}
+
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #62a8ee;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    max-width: 600px;
+    width: calc(100% - 40px);
+    /* Adapta a largura à tela */
+    position: relative;
+    left: 2.5cm;
+    /* Move o container 1,5 cm para a direita */
+}
+
+.header-container h1 {
+    color: white;
+    font-size: 3.5em;
+    /* Aumentei o tamanho */
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+.overlay {
+    background: rgba(79, 172, 254, 0.9);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    position: relative;
+    z-index: 1;
+    width: calc(100% - 40px);
+    /* Ocupa toda a largura da tela */
+}
+
+h2.title {
+    background-color: #0073e6;
+    color: white;
+    padding: 20px;
+    font-size: 3em;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+ul li a.link-avaliacao {
+    color: #0073e6;
+    text-decoration: none;
+    border: 2px solid transparent;
+    padding: 10px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+
+ul li a.link-avaliacao:hover {
+    border: 2px solid #0073e6;
+    border-radius: 8px;
+    background-color: rgba(0, 115, 230, 0.1);
+}
+
+ul li a.link-avaliacao:focus {
+    outline: none;
+    box-shadow: 0 0 10px #0073e6;
+}
+
+.edit-button {
+    background-color: #0073e6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.delet-button {
+    background-color: #b22222;
+    /* Updated color for the delete button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.delet-button:hover {
+    background-color: #930000;
+    /* Darken the color on hover */
+    transform: scale(1.05);
+}
+
+.edit-button:hover {
+    background-color: #005bb5;
+    transform: scale(1.05);
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #0073e6;
+    font-weight: bold;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(8, 6, 3);
+}

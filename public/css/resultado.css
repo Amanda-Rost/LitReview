@@ -180,3 +180,13 @@ a {
     /* Define a cor do texto */
     color: rgb(8, 6, 3);
 }
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #0073e6;
+    font-weight: bold;
+    width: 100%;
+    margin-top: auto; /* Empurra o rodapé para o final */
+}

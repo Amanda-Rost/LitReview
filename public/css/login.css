@@ -84,3 +84,14 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #0073e6;
+    font-weight: bold;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}

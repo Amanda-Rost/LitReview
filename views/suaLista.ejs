@@ -5,20 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Lista</title>
+    <link rel="stylesheet" href="/css/suasAvaliacoesELista.css">
 </head>
 <%- include('./partials/head') %>
 
     <body>
-
-        <h2>Sua Lista de leitura</h2>
+        <div class="overlay"></div> 
+        <div class="container">
+        <h2 class="title">Sua Lista de leitura</h2>
         <ul>
             <% for (let livro of livros) {%>
-                <li><a href="/maisInformacoes/<%=livro.isbn10 || livro.isbn13%>">
+                <li><a href="/maisInformacoes/<%=livro.isbn10 || livro.isbn13%>" class="link-avaliacao">
                         <%=livro.titulo%>
                     </a></li>
                     <form action="/livro/<%=livro._id%>?_method=DELETE" method="post">
-                        <button>Apagar</button>
+                        <button class="delet-button">Apagar</button>
                     </form>
               <% } %>  
         </ul>
+        </div>
         <%- include('./partials/footer') %>

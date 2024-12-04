@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionando uma avaliacao</title>
+    <title>Adicionando uma avaliação</title>
+    <link rel="stylesheet" href="/css/adicionarAvaliacao.css">
 </head>
 <%- include('./partials/head') %>
-
-    <body>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
         <% for (let item of resposta.items) { const livro=item.volumeInfo;%>
-            <h2>Faça sua avaliação do livro <%=livro.title %>
-            </h2>
-
+            <h2 class="title">Faça sua avaliação do livro <%=livro.title %></h2>
             <form action="/adicionarAvaliacao/<%=livro.industryIdentifiers[0].identifier%>" method="post">
-                <label for="recomenda">Recomenda?: </label>
-                <input type="radio" name="recomenda" value="true"> Sim &nbsp; |
-                <input type="radio" name="recomenda" value="false"> Não
-                <br><br>
-                <label for="comentario">Comentario: </label>
-                <input type="text" id="comentario" name="comentario">
-                <br><br>
-                <label for="email">Confirme seu email: </label>
-                <input type="email" id="email" name="email">
+                <div class="form-group radio-group">
+                    <label for="recomenda">Recomenda?</label>
+                    <input type="radio" name="recomenda" value="true" id="sim"> <label for="sim">Sim</label>
+                    <input type="radio" name="recomenda" value="false" id="nao"> <label for="nao">Não</label>
+                </div>
+                <div class="form-group">
+                    <label for="comentario">Comentário: </label>
+                    <input type="text" id="comentario" name="comentario">
+                </div>
+                <div class="form-group">
+                    <label for="email">Confirme seu email</label>
+                    <input type="email" id="email" name="email">
+                </div>
                 <% } %>
-                    <button>Enviar</button>
+                <button class="submit-button">Enviar</button>
             </form>
-            <br>
-            <a href="/principal"><button>Voltar</button></a>
-    </body>
-
+            <a href="/principal"><button class="back-button">Voltar</button></a>
+    </div>
+    <%- include('./partials/footer') %>
+</body>
 </html>

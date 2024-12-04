@@ -8,45 +8,29 @@
 </head>
 <body>
     <div class="overlay"></div> 
+    <div class="sair">
+        <a onclick="window.location.href='/'">Sair</a>
+    </div>
     <div class="container">
-       
         <h1 class="title">Bem-vindo ao LitReview</h1>
-
-        <div 
-        class="busca">
+        <div class="busca">
             <h2 class="prin">Pesquisar</h2>
             <form class="center" action="/pesquisa" method="get">
                 <input type="text" name="algo" id="algo" placeholder="Digite o que deseja achar">
-                <div>
+                <div class="button-group">
                     <input type="radio" name="tipo" value="isbn:"> ISBN &nbsp; |
                     <input type="radio" name="tipo" value="intitle:"> Título &nbsp; |
-                    <input type="radio" name="tipo" value="authors:"> Author &nbsp; |
+                    <input type="radio" name="tipo" value="authors:"> Autor &nbsp; |
                     <input type="radio" name="tipo" value="categories:"> Gênero
                 </div>
                 <button type="submit">Buscar</button>
             </form>
-        </div>
-
-        <div class="reviews">
-            <h2>Suas Avaliações</h2>
-            <button onclick="window.location.href='/suasAvaliacoes'">Clique aqui</button>
+            <div class="botones">
+                <button class="reviews" onclick="window.location.href='/suasAvaliacoes'">Suas Avaliações</button>
+                <button class="faves" onclick="window.location.href='/suaLista'">Sua Lista</button>
+            </div>
         </div>
     </div>
-</div>
-
-<div >
-    <h2>Suas Lista</h2>
-    <button onclick="window.location.href='/suaLista'">Acesse aqui</button>
-</div>
-</div>
-
-</div>
-
-<div >
-    <a onclick="window.location.href='/'">Sair</a>
-</div>
-</div>
     <%- include('./partials/footer') %>
-
 </body>
 </html>
