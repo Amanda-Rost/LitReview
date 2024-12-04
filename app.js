@@ -63,6 +63,10 @@ app.get('/suasAvaliacoes', async (req, res) => {
     const avaliacoes = await Avaliacao.find({})
     res.render('suasAvaliacoes', { avaliacoes })
 })
+app.get('/suaLista', async (req, res) => {
+    const livros = await Livro.find({});
+    res.render('suaLista', { livros })
+})
 
 app.post('/confirmaUsuario', async (req, res) => {
     try {
@@ -83,14 +87,23 @@ app.post('/confirmaUsuario', async (req, res) => {
 app.get('/maisInformacoes/:livro', async (req, res) => {
     const { livro } = req.params;
     let resposta = {}
-    const adicionado = req.query.adicionado === 'true';
-
+    const avaliacoes = await Avaliacao.find({ isbn: livro }).exec();
     await request("https://www.googleapis.com/books/v1/volumes?q=isbn:" + livro, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            resposta = JSON.parse(body)
+            resposta = JSON.parse(body);
+        } else {
+            console.error("Erro na requisição:", error);
         }
-
-        res.render('maisInformacoes', { resposta, adicionado })
+      
+        console.log("Avaliações: " + avaliacoes)
+        const adicionado = req.query.adicionado === 'true';
+        if (resposta && Array.isArray(resposta.items)) {
+            res.render('maisInformacoes', { resposta, avaliacoes });
+            
+        } else {
+            console.error("Estrutura inválida da resposta:", resposta);
+            res.render('maisInformacoes', { resposta: { items: [] }, avaliacoes, adicionado });
+        }
     })
 })
 

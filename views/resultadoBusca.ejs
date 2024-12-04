@@ -8,8 +8,6 @@
 </head>
  <%- include('./partials/head') %>
 <body>
-   
-
     <% if (resposta.totalItems > 0) { %>
         <div class="sub-header">
             <h2>Livros encontrados</h2>
@@ -45,7 +43,7 @@
                     } %>
                     <div>
                        
-                    <a href="/maisInformacoes/<%=livro.industryIdentifiers[0].identifier%>" method="GET" ><button>Mais informações</button></a>
+                    <a href="/maisInformacoes/<%=livro.industryIdentifiers[1].identifier%>" method="GET" ><button>Mais informações</button></a>
                     </div>
                 </div>
                

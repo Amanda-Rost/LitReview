@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Lista</title>
+</head>
+<%- include('./partials/head') %>
+
+    <body>
+
+        <h2>Sua Lista de leitura</h2>
+        <ul>
+            <% for (let livro of livros) {%>
+                <li><a href="/maisInformacoes/<%=livro.isbn10 || livro.isbn13%>">
+                        <%=livro.titulo%>
+                    </a></li>
+                    <form action="/livro/<%=livro._id%>?_method=DELETE" method="post">
+                        <button>Apagar</button>
+                    </form>
+              <% } %>  
+        </ul>
+        <%- include('./partials/footer') %>

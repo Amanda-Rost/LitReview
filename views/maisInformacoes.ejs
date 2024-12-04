@@ -63,7 +63,7 @@
                 } %>
                 
                 <div class="button-group">
-                    <% if (adicionado) { %>
+                    <% if (typeof adicionado !== 'undefined' && adicionado) { %>
                         <p>FOI ADICIONADO A LISTA COM SUCESSO :D</p>
                     <% } else { %>
                             <button type="submit" class="secondary" id="addToListButton">Adicionar à minha lista</button>
@@ -84,10 +84,33 @@
                 </div> 
             
             </div>
-
+            <div>
+                <h2>Avaliações do livro</h2>
+                <ul>
+                    <% if (Array.isArray(avaliacoes) && avaliacoes.length > 0) { %>
+                        <% for (let avaliacao of avaliacoes) { %>
+                            <li>
+                               Usuário: <%= avaliacao.email %></a>
+                               <p>Recomenta? <b>
+                                <%const recomenda = avaliacao.recomenda
+                                if(recomenda){%>
+                                    <ul>Sim</ul>
+                               <% }else { %>
+                                <ul>Não</ul>
+                                <% } %>
+                            </b></p>
+                        <p>Comentário: <b>
+                                <%=avaliacao.comentario%>
+                            </b></p>
+                            </li>
+                        <% } %>
+                    <% } else { %>
+                        <p>AINDA NÃO HÁ AVALIAÇÕES</p>
+                    <% } %>
+                </ul>
+            </div>
             <div class="voltar">
-                <form action="/resultadoBusca" method="POST">
-                    <button type="submit">Voltar</button>
+                    <button onclick="window.location.href='/principal'" type="submit">Voltar</button>
                 </form>
             </div>
         <% } %>
