@@ -61,7 +61,7 @@ app.get('/principal', async (req, res) => {
 
 app.get('/suasAvaliacoes', async (req, res) => {
     const avaliacoes = await Avaliacao.find({})
-    res.render('suasAvaliacoes', {avaliacoes})
+    res.render('suasAvaliacoes', { avaliacoes })
 })
 
 app.post('/confirmaUsuario', async (req, res) => {
@@ -80,16 +80,16 @@ app.post('/confirmaUsuario', async (req, res) => {
     }
 })
 
-app.get('/maisInformacoes/:livro', async (req,res) =>{
-     const {livro} = req.params;
-     let resposta = {}
-     const adicionado = req.query.adicionado === 'true';
-  
-     await request("https://www.googleapis.com/books/v1/volumes?q=isbn:" + livro, (error, response, body) => {
+app.get('/maisInformacoes/:livro', async (req, res) => {
+    const { livro } = req.params;
+    let resposta = {}
+    const adicionado = req.query.adicionado === 'true';
+
+    await request("https://www.googleapis.com/books/v1/volumes?q=isbn:" + livro, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             resposta = JSON.parse(body)
         }
-        
+
         res.render('maisInformacoes', { resposta, adicionado })
     })
 })
@@ -108,20 +108,57 @@ app.get('/pesquisa', async (req, res) => {
     })
 });
 
-app.get('/adicionarLivro', (req, res) => {
-    res.render('adicionarLivro')
-})
-
 app.get('/avaliacao/:id', async (req, res) => {
     const { id } = req.params;
-    const avalicao = await Avaliacao.findById(id);
-    res.render('verAvaliacao', { avalicao })
+    const avaliacao = await Avaliacao.findById(id);
+    res.render('verAvaliacao', { avaliacao })
 })
 
-app.post('/principal', async (req, res) => {
-    const novoLivro = new Livro(req.body);
-    await novoLivro.save();
-    res.redirect('/principal')
+app.get('/editAvaliacao/:id', async (req, res) => {
+    const { id } = req.params;
+    const avaliacao = await Avaliacao.findById(id)
+    res.render('editAvaliacao', { avaliacao });
+})
+
+app.post('/novaAvaliacao/:isbn', async (req, res) => {
+    const { isbn } = req.params;
+
+    await request("https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn, async (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            const resposta = JSON.parse(body);
+
+            res.render('adicionarAvaliacao', { resposta });
+        } else {
+            res.status(500).send('Erro ao buscar dados do livro.');
+        }
+    });
+});
+
+
+app.post('/adicionarAvaliacao/:id', async (req, res) => {
+    const { id } = req.params;
+    await request("https://www.googleapis.com/books/v1/volumes?q=isbn:" + id, async (error, response, body) => {
+        const resposta = JSON.parse(body);
+        if (resposta.items && Array.isArray(resposta.items)) {
+            for (let item of resposta.items) {
+                const livro = item.volumeInfo;
+                const adi = {
+                    email: req.body.email,
+                    titulo: livro.title,
+                    isbn: livro.industryIdentifiers && livro.industryIdentifiers[0]?.identifier
+                        ? livro.industryIdentifiers[1].identifier
+                        : "Não disponível",
+                    recomenda: req.body.recomenda,
+                    comentario: req.body.comentario
+                };
+
+                await Avaliacao.insertMany([adi]).catch(e => {
+                    console.log(`Erro ao salvar no banco... ${e}`);
+                })
+                res.redirect('/principal')
+            }
+        }
+    })
 })
 
 app.post('/adicionaNaLista/:id', async (req, res) => {
@@ -137,7 +174,7 @@ app.post('/adicionaNaLista/:id', async (req, res) => {
 
                     const autores = livro.authors ? livro.authors.join(", ") : "Sem autores";
                     const genero = livro.categories ? livro.categories.join(", ") : "Sem gêneros";
-                  
+
                     const adi = {
                         titulo: livro.title,
                         autores: autores,
@@ -171,22 +208,21 @@ app.post('/principalUsuario', async (req, res) => {
     }
 })
 
-app.get('/editAvaliacao/:id', async (req, res) => {
-    const { id } = req.params;
-    const avaliacao = await Avaliacao.findById(id)
-    res.render('editAvaliacao', { avaliacao });
-})
-
 app.put('/avaliacao/:id', async (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
     await Avaliacao.findByIdAndUpdate(id, req.body, { runValidators: true });
     res.redirect('/avaliacao/' + id);
 })
 
 app.delete('/avaliacao/:id', async (req, res) => {
     const { id } = req.params;
-    await Livro.findByIdAndDelete(id)
+    await Avaliacao.findByIdAndDelete(id)
     res.redirect('/principal');
 })
 
-app.listen(3000, () => console.log("Servidor ligado na porta 3000!"))
+app.delete('/livro/:id', async (req, res) => {
+    const { id } = req.params;
+    await Livro.findByIdAndDelete(id)
+    res.redirect('/principal');
+})
+app.listen(5000, () => console.log("Servidor ligado na porta 5000!"))

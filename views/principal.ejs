@@ -9,9 +9,11 @@
 <body>
     <div class="overlay"></div> 
     <div class="container">
+       
         <h1 class="title">Bem-vindo ao LitReview</h1>
 
-        <div class="busca">
+        <div 
+        class="busca">
             <h2 class="prin">Pesquisar</h2>
             <form class="center" action="/pesquisa" method="get">
                 <input type="text" name="algo" id="algo" placeholder="Digite o que deseja achar">
@@ -30,7 +32,15 @@
             <button onclick="window.location.href='/suasAvaliacoes'">Clique aqui</button>
         </div>
     </div>
+</div>
+
+<div class="reviews">
+    <h2>Suas Lista</h2>
+    <button onclick="window.location.href='/suaListas'">Acesse aqui</button>
+</div>
+</div>
 
     <%- include('./partials/footer') %>
+
 </body>
 </html>

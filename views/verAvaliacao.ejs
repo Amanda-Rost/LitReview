@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suas Avaliações</title>
+</head>
+<%- include('./partials/head') %>
+
+    <body>
+
+        <h2>Avaliação do livro <%=avaliacao.titulo %></h2>
+        <p>Usuário: <%=avaliacao.email %></p>
+        <p>Recomenta? <b>
+                <%const recomenda = avaliacao.recomenda
+                if(recomenda){%>
+                    <ul>Sim</ul>
+               <% }else { %>
+                <ul>Não</ul>
+                <% } %>
+            </b></p>
+        <p>Comentário: <b>
+                <%=avaliacao.comentario%>
+            </b></p>
+        <br>
+        <a href="/editAvaliacao/<%=avaliacao._id%>"><button>Alterar</button></a>
+        <br><br>
+        <form action="/deleteAvaliacao/<%=avaliacao._id%>?_method=DELETE" method="post">
+            <button>Apagar</button>
+        </form>
+        <br><br>
+        <a href="/suasAvaliacoes"><button>Voltar</button></a>

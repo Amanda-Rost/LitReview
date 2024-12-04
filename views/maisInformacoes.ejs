@@ -66,13 +66,14 @@
                     <% if (adicionado) { %>
                         <p>FOI ADICIONADO A LISTA COM SUCESSO :D</p>
                     <% } else { %>
-                        <form action="/adicionaNaLista/<%=ident%>" method="POST" id="addListForm">
                             <button type="submit" class="secondary" id="addToListButton">Adicionar à minha lista</button>
-                        </form>
                     <% } %>
-                    <button onclick="window.location.href='/novaAvaliação'">Adicionar Avaliação</button>
-                </div>
 
+                    <form action="/novaAvaliacao/<%=ident%>" method="POST" >
+                        <button type="submit" class="secondary" id="addToListButton2">Adicionar Avaliação</button>
+                    </form>
+                 
+                </div>
                 <!-- Formulário oculto para capturar o e-mail -->
                 <div id="emailFormContainer" style="display: none;">
                     <form action="/adicionaNaLista/<%=ident%>" method="POST">
@@ -80,7 +81,8 @@
                         <input type="email" id="email" name="email" required>
                         <button type="submit">Confirmar e Adicionar</button>
                     </form>
-                </div>
+                </div> 
+            
             </div>
 
             <div class="voltar">
@@ -99,6 +101,7 @@
             event.preventDefault(); // Prevenir o envio do formulário
             document.getElementById("emailFormContainer").style.display = "block"; // Mostrar o formulário
         });
+
     </script>
 </body>
 </html>
