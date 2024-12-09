@@ -137,10 +137,3 @@ ul li a.link-avaliacao:focus {
     background-color: #005bb5;
     transform: scale(1.05);
 }
-
-
-
-a {
-    text-decoration: none;
-    color: rgb(8, 6, 3);
-}

@@ -59,3 +59,9 @@ body {
     width: 100%;
     margin-top: auto; /* Empurra o rodapé para o final */
 }
+a {
+    /* Remove o sublinhado dos links */
+    text-decoration: none;
+    /* Define a cor do texto */
+    color: rgb(8, 6, 3);
+}

@@ -89,10 +89,5 @@ button.secondary:hover {
     margin-top: 20px;
 }
 
-a {
-    /* Remove o sublinhado dos links */
-    text-decoration: none;
-    /* Define a cor do texto */
-    color: rgb(8, 6, 3);
-}
+
 
