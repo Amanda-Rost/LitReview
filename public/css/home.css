@@ -8,7 +8,6 @@ body {
   background: linear-gradient(to bottom, #4facfe, #00f2fe);
   color: #fff;
   text-align: center;
-  position: relative;
   overflow: hidden;
 }
 
@@ -72,13 +71,3 @@ button:focus {
   outline: 3px solid #fff;
 }
 
-footer {
-  text-align: center;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.95);
-  color: #0073e6;
-  font-weight: bold;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-}

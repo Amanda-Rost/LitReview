@@ -1,5 +1,4 @@
 body {
-    font-family: 'Roboto', sans-serif;
     background: linear-gradient(to bottom, #4facfe, #00f2fe);
     display: flex;
     justify-content: center;
@@ -21,14 +20,9 @@ body::before {
     z-index: -1;
 }
 
-.container {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 400px;
-    max-width: 90%;
+.container{
+width: 400px;
+max-width: 90%;
 }
 
 h1 {
@@ -85,13 +79,3 @@ a:hover {
     text-decoration: underline;
 }
 
-footer {
-    text-align: center;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.95);
-    color: #0073e6;
-    font-weight: bold;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-}

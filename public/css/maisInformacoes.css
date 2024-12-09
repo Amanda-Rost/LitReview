@@ -1,5 +1,4 @@
 body {
-    font-family: 'Roboto', sans-serif;
     background: url('img/fundo2.webp') no-repeat center center; /* Adicionando a imagem de fundo */
     background-size: cover; /* Faz a imagem cobrir toda a área */
     margin: 0;
@@ -10,42 +9,9 @@ body {
     position: relative;
     min-height: 100vh; /* Garante que o body cubra a altura total da tela */
 }
-.header-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #62a8ee; /* Cor de fundo */
-    border-radius: 15px; /* Bordas arredondadas */
-    padding: 20px; /* Espaçamento interno */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
-    margin: 20px auto; /* Centraliza e adiciona espaçamento */
-    max-width: 600px; /* Limita a largura */
-}
-
-.header-container h1 {
-    color: white; /* Cor do texto */
-    font-size: 2.5em; /* Tamanho da fonte */
-    font-weight: bold; /* Negrito */
-    text-align: center; /* Centraliza o texto */
-    margin: 0; /* Remove margens externas */
-}
-
-.overlay {
-    background: rgba(79, 172, 254, 0.8); /* Ajuste da opacidade */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
 
 .container {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    text-align: center;
+
     width: 80%;
     max-width: 800px;
     margin: 20px;
@@ -130,13 +96,3 @@ a {
     color: rgb(8, 6, 3);
 }
 
-footer {
-    text-align: center;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.95);
-    color: #0073e6;
-    font-weight: bold;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-}

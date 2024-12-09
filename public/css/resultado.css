@@ -1,6 +1,4 @@
 body {
-    /* Define a fonte principal como 'Roboto', com fallback para sans-serif */
-    font-family: 'Roboto', sans-serif;
     /* Aplica um gradiente de fundo vertical do azul (#4facfe) ao azul claro (#00f2fe) */
     background: linear-gradient(to bottom, #4facfe, #00f2fe);
     /* Remove as margens padrão */
@@ -49,7 +47,20 @@ body {
     /* Define a ordem de empilhamento abaixo do cabeçalho */
     z-index: 1;
 }
-
+.container{
+       /* Fundo branco com 95% de opacidade */
+       background: rgba(255, 255, 255, 0.95);
+       /* Espaçamento interno */
+       padding: 30px;
+       /* Bordas arredondadas */
+       border-radius: 15px;
+       /* Sombra mais forte */
+       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+       /* Centraliza o texto */
+       text-align: center;
+       /* Define largura de 80% da tela */
+       width: 80%;
+}
 .header {
     position: relative;
     display: inline-block;
@@ -77,18 +88,7 @@ body {
 }
 
 .container {
-    /* Fundo branco com 95% de opacidade */
-    background: rgba(255, 255, 255, 0.95);
-    /* Espaçamento interno */
-    padding: 30px;
-    /* Bordas arredondadas */
-    border-radius: 15px;
-    /* Sombra mais forte */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    /* Centraliza o texto */
-    text-align: center;
-    /* Define largura de 80% da tela */
-    width: 80%;
+      width: 80%;
     /* Limita a largura máxima a 1200px */
     max-width: 1200px;
     /* Margem em torno do container */

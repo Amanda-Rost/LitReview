@@ -1,16 +1,10 @@
 body {
-    font-family: 'Roboto', sans-serif;
     background: url('img/fundo2.webp') no-repeat center center;
     background-size: cover;
     margin: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    /* Alinha os itens ao centro verticalmente */
-    height: 100vh;
-    position: relative;
 }
-
 .header-container {
     display: flex;
     justify-content: center;
@@ -57,10 +51,14 @@ body {
     width: 80%;
     max-width: 800px;
     margin: 20px auto;
-    position: relative;
-    z-index: 1;
-    width: calc(100% - 40px);
-    /* Ocupa toda a largura da tela */
+}
+
+
+footer {
+    font-weight: bold;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 
 h2.title {
@@ -140,16 +138,7 @@ ul li a.link-avaliacao:focus {
     transform: scale(1.05);
 }
 
-footer {
-    text-align: center;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.95);
-    color: #0073e6;
-    font-weight: bold;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-}
+
 
 a {
     text-decoration: none;
